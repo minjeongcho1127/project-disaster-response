@@ -33,11 +33,6 @@ def load_data(database_filepath):
     engine = create_engine('sqlite:///'+ database_filepath)
     df = pd.read_sql_table('DisasterResponseTable', engine)
     
-    # replace the maximum value of 2 in the column 'related' to 1
-    df['related'] = df['related'].map(lambda x: 1 if x == 2 else x)
-    # drop the 'child_alone' column which only contains zeros.
-    df.drop('child_alone', axis = 1, inplace = True)
-    
     # Using the message column (X), predict classifications for 35 categories (y)
     X = df['message']
     y = df.iloc[:, 4:]

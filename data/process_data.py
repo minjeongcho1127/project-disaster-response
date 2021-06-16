@@ -56,6 +56,11 @@ def clean_data(df):
     
     # remove duplicates
     df.drop_duplicates(inplace = True)
+
+    # replace the maximum value of 2 in the column 'related' to 1
+    df['related'] = df['related'].map(lambda x: 1 if x == 2 else x)
+    # drop the 'child_alone' column which only contains zeros.
+    df.drop('child_alone', axis = 1, inplace = True)
     
     return df
 
